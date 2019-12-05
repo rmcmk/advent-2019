@@ -9,7 +9,7 @@ class Day2 {
     private fun test(expected: List<Int>, input: List<Int>) {
         val computer = IntcodeComputer(input.toMutableList())
         computer.step()
-        assertEquals(expected, computer.memoryCopy())
+        assertEquals(expected, computer.memory)
     }
 
     @Test
@@ -43,15 +43,17 @@ class Day2 {
     @Test
     fun `test part 1 answer`() {
         val computer = createIntcodeComputer()
-        assertEquals(3516593, part1(computer))
+        assertEquals(3516593, computer.part1())
     }
 
     @Test
     fun `test part 2 known solutions`() {
+        assertEquals(1202, part2(3516593))
     }
 
     @Test
     fun `test part 2 answer`() {
+        assertEquals(7749, part2(19690720))
     }
 
 }

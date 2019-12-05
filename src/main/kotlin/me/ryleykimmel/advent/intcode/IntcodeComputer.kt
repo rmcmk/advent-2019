@@ -1,6 +1,6 @@
 package me.ryleykimmel.advent.intcode
 
-class IntcodeComputer(private val memory: MutableList<Int>) {
+class IntcodeComputer(private val _memory: MutableList<Int>) {
     private val instructions = hashMapOf(
         OP_ADD to AddInstruction(),
         OP_MULTI to MultiplyInstruction()
@@ -8,17 +8,29 @@ class IntcodeComputer(private val memory: MutableList<Int>) {
 
     private var position = 0
 
-    fun peek(position: Int) = memory[position]
-    fun get(offset: Int) = memory[position + offset]
+    var memory: MutableList<Int>
+        get() = _memory.toMutableList()
+        set(value) {
+            value.toMutableList()
+        }
+
+    var noun: Int
+        get() = get(NOUN_ADDR)
+        set(value) = set(NOUN_ADDR, value)
+
+    var verb: Int
+        get() = get(VERB_ADDR)
+        set(value) = set(VERB_ADDR, value)
+
+    fun peek(position: Int) = _memory[position]
+    fun get(offset: Int) = _memory[position + offset]
     fun set(position: Int, value: Int) {
-        memory[position] = value
+        _memory[position] = value
     }
-    fun dereference(offset: Int) = memory[get(offset)]
+    fun dereference(offset: Int) = _memory[get(offset)]
     fun skip(positions: Int) {
         position += positions
     }
-
-    fun memoryCopy() = memory.toMutableList()
 
     fun step() {
         while (true) {
@@ -31,6 +43,8 @@ class IntcodeComputer(private val memory: MutableList<Int>) {
     }
 
     companion object {
+        const val NOUN_ADDR = 1
+        const val VERB_ADDR = 2
         const val OP_ADD = 1
         const val OP_MULTI = 2
         const val OP_EXIT = 99
