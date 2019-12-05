@@ -3,7 +3,7 @@ package me.ryleykimmel.advent.day1
 fun parseModules(): List<Module> = ClassLoader.getSystemResourceAsStream("day1")
     .bufferedReader()
     .readLines()
-    .map(Integer::parseInt)
+    .map(String::toInt)
     .map(::Module)
 
 fun part1(modules: List<Module>) = modules.sumBy(Module::requiredFuel)
