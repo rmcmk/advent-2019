@@ -5,12 +5,15 @@ class Map {
 
     fun visit(wire: Wire) {
         var position = Position.ORIGIN
+        var delay = 0
         wire.moves.forEach { move ->
             repeat(move.steps) {
                 position = position.translate(move.direction)
 
-                val tile = tiles.getOrPut(position) { Tile() }
-                tile.visit(wire)
+                tiles.getOrPut(position) { Tile() }.apply {
+                    delay += 1
+                    visit(wire, delay)
+                }
             }
         }
     }

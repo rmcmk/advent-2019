@@ -25,6 +25,17 @@ fun part1(wires: List<Wire>): Int {
         .min() ?: error("Unable to find intersection!")
 }
 
+fun part2(wires: List<Wire>): Int {
+    val map = Map()
+    wires.forEach(map::visit)
+
+    return map.tiles.values.filter(Tile::intersects)
+        .map(Tile::delay)
+        .min() ?: error("Unable to find signal delay!")
+}
+
 fun main() {
-    part1(parseWire("day3"))
+    val wire = parseWire("day3")
+    println("p1: ${part1(wire)}")
+    println("p2: ${part2(wire)}")
 }
