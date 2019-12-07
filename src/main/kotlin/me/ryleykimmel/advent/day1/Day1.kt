@@ -1,6 +1,6 @@
 package me.ryleykimmel.advent.day1
 
-fun parseModules(): List<Module> = ClassLoader.getSystemResourceAsStream("day1")
+fun parseModules() = ClassLoader.getSystemResourceAsStream("day1")
     .bufferedReader()
     .readLines()
     .map(String::toInt)
