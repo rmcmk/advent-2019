@@ -7,7 +7,7 @@ class Map {
         var position = Position.ORIGIN
         wire.moves.forEach { move ->
             repeat(move.steps) {
-                position = position.transform(move.direction)
+                position = position.translate(move.direction)
 
                 val tile = tiles.getOrPut(position) { Tile() }
                 tile.visit(wire)
